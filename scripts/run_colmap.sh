@@ -81,19 +81,19 @@ colmap feature_extractor \
     --database_path "${DB_PATH}" \
     --image_path "${IMG_DIR}" \
     --ImageReader.single_camera "${SINGLE_CAMERA}" \
-    --SiftExtraction.use_gpu "${USE_GPU}" \
+    --FeatureExtraction.use_gpu "${USE_GPU}" \
     2>&1 | tee "${LOG_DIR}/feature_extractor.log"
 
 echo "[2/4] Feature matching"
 if [[ "${MATCHER}" == "sequential" ]]; then
     colmap sequential_matcher \
         --database_path "${DB_PATH}" \
-        --SiftMatching.use_gpu "${USE_GPU}" \
+        --FeatureMatching.use_gpu "${USE_GPU}" \
         2>&1 | tee "${LOG_DIR}/matcher.log"
 elif [[ "${MATCHER}" == "exhaustive" ]]; then
     colmap exhaustive_matcher \
         --database_path "${DB_PATH}" \
-        --SiftMatching.use_gpu "${USE_GPU}" \
+        --FeatureMatching.use_gpu "${USE_GPU}" \
         2>&1 | tee "${LOG_DIR}/matcher.log"
 else
     echo "Unknown matcher: ${MATCHER}"
